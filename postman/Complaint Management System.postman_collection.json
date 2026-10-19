@@ -1,0 +1,177 @@
+{
+  "info": {
+    "name": "Complaint Management System - Local API",
+    "description": "Local API requests for auth and complaint workflows. Login stores the JWT for protected requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api" },
+    { "key": "email", "value": "rohit123@gmail.com" },
+    { "key": "password", "value": "" },
+    { "key": "token", "value": "" },
+    { "key": "complaintId", "value": "" },
+    { "key": "newUserName", "value": "Postman User" },
+    { "key": "newUserEmail", "value": "postman.user@example.com" },
+    { "key": "newUserPassword", "value": "Postman123!" }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register User",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.collectionVariables.set('newUserEmail', 'postman.' + Date.now() + '@example.com');"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{newUserName}}\",\n  \"email\": \"{{newUserEmail}}\",\n  \"password\": \"{{newUserPassword}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/auth/register"
+          }
+        },
+        {
+          "name": "Login (save token)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const loginData = pm.response.json();",
+                  "if (loginData.token) pm.collectionVariables.set('token', loginData.token);",
+                  "if (loginData.user) pm.collectionVariables.set('role', loginData.user.role);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Complaints",
+      "item": [
+        {
+          "name": "Create Complaint (save ID)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const complaintData = pm.response.json();",
+                  "if (complaintData.complaint && complaintData.complaint._id) pm.collectionVariables.set('complaintId', complaintData.complaint._id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Postman test complaint\",\n  \"description\": \"Testing complaint creation through Postman.\",\n  \"category\": \"Technical\",\n  \"priority\": \"Medium\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/complaints"
+          }
+        },
+        {
+          "name": "List Complaints",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/complaints"
+          }
+        },
+        {
+          "name": "Complaint Summary Stats",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/complaints/stats/summary"
+          }
+        },
+        {
+          "name": "Get Complaint by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/complaints/{{complaintId}}"
+          }
+        },
+        {
+          "name": "Add Comment",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Checking this complaint through Postman.\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/complaints/{{complaintId}}/comments"
+          }
+        },
+        {
+          "name": "Update Status (Admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Resolved\",\n  \"note\": \"Resolved via Postman\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": "{{baseUrl}}/complaints/{{complaintId}}/status"
+          }
+        },
+        {
+          "name": "Delete Complaint",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/complaints/{{complaintId}}"
+          }
+        }
+      ]
+    }
+  ]
+}
