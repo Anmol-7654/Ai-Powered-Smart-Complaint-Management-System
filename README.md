@@ -5,6 +5,12 @@ Intelligent • Automated • Transparent • Efficient
 
 An AI-powered web-based platform designed to streamline complaint registration, classification, tracking, and resolution through intelligent automation.
 
+<br>
+
+!Project !Status !License
+
+</div>
+
 
 📌 Overview
 
