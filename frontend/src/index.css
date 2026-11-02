@@ -311,8 +311,12 @@ textarea:focus {
 }
 
 .auth-footer a {
-  color: var(--primary);
+  color: #fff;
   font-weight: 700;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
 }
 
 .stat-grid {
@@ -1129,6 +1133,15 @@ h1 {
 
 .btn--primary {
   background: linear-gradient(135deg, #3d63d2, #2d4fb8);
+}
+
+.navbar-links a.btn--primary {
+  background: #e8efff;
+  color: #2345aa;
+}
+
+.navbar-links a.btn--primary:hover {
+  background: #d6e2ff;
 }
 
 .auth-card {
