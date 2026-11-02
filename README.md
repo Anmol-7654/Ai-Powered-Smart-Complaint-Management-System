@@ -134,7 +134,7 @@ The project includes the following screen captures to demonstrate the UI and sys
 ![Admin Overview](https://github.com/Anmol-7654/Ai-Powered-Smart-Complaint-Management-System/blob/e9517acd64c469b57c9679775edbb9c2a9e129ad/Screenshot%20(40).png)
 
 ### 7. Registration Screen
-![Registration Screen]()
+![Registration Screen](https://github.com/Anmol-7654/Ai-Powered-Smart-Complaint-Management-System/blob/146b3de96a71a8514c7d4d8f56f23fd5697635ad/Screenshot%20(41).png)
 
 ---
 
