@@ -7,7 +7,6 @@ An AI-powered web-based platform designed to streamline complaint registration, 
 
 <br>
 
-!Project !Status !License
 
 </div>
 
