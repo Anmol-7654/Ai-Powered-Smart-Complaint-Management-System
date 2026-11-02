@@ -116,7 +116,7 @@ The project includes the following screen captures to demonstrate the UI and sys
 > Place the screenshot images inside a folder named `screenshots/` in the project root.
 
 ### 1. Login Screen
-![Login Screen](screenshots/1.png)
+![Login Screen](Screenshorts/35.png)
 
 ### 2. User Dashboard
 ![User Dashboard](screenshots/2.png)
