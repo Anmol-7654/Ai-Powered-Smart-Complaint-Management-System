@@ -116,7 +116,7 @@ The project includes the following screen captures to demonstrate the UI and sys
 > Place the screenshot images inside a folder named `screenshots/` in the project root.
 
 ### 1. Login Screen
-![Login Screen](Screenshorts/35.png)
+![Login Screen](https://github.com/Anmol-7654/Ai-Powered-Smart-Complaint-Management-System/blob/9e33c7767b3567c7f94c9dce6fb70d902fd08a52/Screenshot%20(35).png)
 
 ### 2. User Dashboard
 ![User Dashboard](screenshots/2.png)
